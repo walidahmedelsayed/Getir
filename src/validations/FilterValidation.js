@@ -7,12 +7,20 @@ module.exports = {
         .notEmpty()
         .withMessage("No startDate was specified.")
         .isDate()
-        .withMessage("The provided startDate is not a valid date."),
+        .withMessage("The provided startDate is not a valid date.")
+        .matches(/^(\d{4})(-)(\d{1,2})(-)(\d{1,2})$/)
+        .withMessage(
+          "Please enter the startDate with the following format 'YYYY-MM-DD'"
+        ),
       check("endDate")
         .notEmpty()
         .withMessage("No endDate was specified.")
         .isDate()
-        .withMessage("The provided endDate is not a valid date."),
+        .withMessage("The provided endDate is not a valid date.")
+        .matches(/^(\d{4})(-)(\d{1,2})(-)(\d{1,2})$/)
+        .withMessage(
+          "Please enter the endDate with the following format 'YYYY-MM-DD'"
+        ),
       check("minCount")
         .notEmpty()
         .withMessage("No minCount was specified.")
