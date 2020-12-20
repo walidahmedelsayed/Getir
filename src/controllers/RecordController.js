@@ -28,9 +28,16 @@ const filter = async (req, res) => {
       },
     },
   ]).exec((err, records) => {
-    if (err) throw err;
-    console.log(records);
-    res.status(200).json({ code: 0, msg: "Success", records });
+    if (err) {
+      res.status(500).json({
+        code: 500,
+        msg: "Something went wrong while trying to retrieve data.",
+        records: [],
+      });
+    } else {
+      console.log("Data retrieved successfully");
+      res.status(200).json({ code: 0, msg: "Success", records });
+    }
   });
 };
 
