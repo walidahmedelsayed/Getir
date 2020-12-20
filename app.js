@@ -21,7 +21,7 @@ mongoose
     console.log("Connected to the database successfully.");
   })
   .catch((err) => {
-    console.log(err);
+    console.log("Unable to connect to the database");
   });
 
 module.exports = app;
