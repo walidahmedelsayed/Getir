@@ -2,6 +2,13 @@ const Record = require("../models/Record");
 
 const filter = async (req, res) => {
   let { startDate, endDate, minCount, maxCount } = req.body;
+  /**
+   * The aggregations stages:
+   * =========================
+   * 1- Filter the records based on the specified date range to minimize the document to process.
+   * 2- Get the totalCount for each Record.
+   * 3- Filter the records based on the specified count range.
+   */
   Record.aggregate([
     {
       $match: {
@@ -35,7 +42,6 @@ const filter = async (req, res) => {
         records: [],
       });
     } else {
-      console.log("Data retrieved successfully");
       res.status(200).json({ code: 0, msg: "Success", records });
     }
   });

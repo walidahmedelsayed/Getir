@@ -1,38 +1,35 @@
 const { check, validationResult } = require("express-validator");
+const Messages = require("../constants/Messages");
 
 module.exports = {
   validate: () => {
     return [
       check("startDate")
         .notEmpty()
-        .withMessage("No startDate was specified.")
+        .withMessage(Messages.MissingStartDate)
         .isDate()
-        .withMessage("The provided startDate is not a valid date.")
+        .withMessage(Messages.InvalidDateStartDate)
         .matches(/^(\d{4})(-)(\d{1,2})(-)(\d{1,2})$/)
-        .withMessage(
-          "Please enter the startDate with the following format 'YYYY-MM-DD'"
-        ),
+        .withMessage(Messages.InvalidDateFormatStartDate),
       check("endDate")
         .notEmpty()
-        .withMessage("No endDate was specified.")
+        .withMessage(Messages.MissingEndDate)
         .isDate()
-        .withMessage("The provided endDate is not a valid date.")
+        .withMessage(Messages.InvalidDateEndDate)
         .matches(/^(\d{4})(-)(\d{1,2})(-)(\d{1,2})$/)
-        .withMessage(
-          "Please enter the endDate with the following format 'YYYY-MM-DD'"
-        ),
+        .withMessage(Messages.InvalidDateFormatEndDate),
       check("minCount")
         .notEmpty()
-        .withMessage("No minCount was specified.")
+        .withMessage(Messages.MissingMinCount)
         .not()
         .isString()
-        .withMessage("minCount should be a number."),
+        .withMessage(Messages.InvalidMinCountType),
       check("maxCount")
         .notEmpty()
-        .withMessage("No maxCount was specified.")
+        .withMessage(Messages.MissingMaxCount)
         .not()
         .isString()
-        .withMessage("maxCount should be a number."),
+        .withMessage(Messages.InvalidMaxCountType),
     ];
   },
   checkValidationResult: (req, res, next) => {
